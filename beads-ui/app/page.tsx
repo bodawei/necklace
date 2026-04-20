@@ -56,7 +56,7 @@ function DetailPanel({ id }: { id: string }) {
     setLoading(true)
     setErr(null)
     fetch(`/api/beads/${id}`)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(`${r.status}`); return r.json() })
       .then((d) => { setBead(d); setLoading(false) })
       .catch(() => { setErr('Failed to load bead'); setLoading(false) })
   }, [id])
