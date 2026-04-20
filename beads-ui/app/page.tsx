@@ -53,8 +53,6 @@ function DetailPanel({ id }: { id: string }) {
   const [err, setErr] = useState<string | null>(null)
 
   useEffect(() => {
-    setLoading(true)
-    setErr(null)
     fetch(`/api/beads/${id}`)
       .then((r) => { if (!r.ok) throw new Error(`${r.status}`); return r.json() })
       .then((d) => { setBead(d); setLoading(false) })
